@@ -16,6 +16,13 @@ const VendingMachine: React.FC = () => {
       </div>
       <h1>Dispatched Products</h1>
       <hr />
+      <div className={classes.wrapper}>
+        {
+          [1, 2, 3, 4, 5, 7].map(items => (
+            <Products key={items} preparation_time={5} showButton={false} />
+          ))
+        }
+      </div>
     </main>
   )
 }

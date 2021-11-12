@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import classes from "./Products.module.css";
 
 interface IProducts {
-  preparation_time: number
+  preparation_time?: number,
+  showButton?: boolean,
 }
 
-const Products: React.FC<IProducts> = ({ preparation_time }) => {
+const Products: React.FC<IProducts> = ({ preparation_time = 0, showButton = true }) => {
 
-  const [countDown, setCountDown] = useState(preparation_time)
+  const [countDown, setCountDown] = useState<number>(preparation_time)
   const [isDispatching, setIsDispatching] = useState(false)
 
   useEffect(() => {
@@ -32,7 +33,10 @@ const Products: React.FC<IProducts> = ({ preparation_time }) => {
       <img src="https://assets.epicurious.com/photos/57c5c6d9cf9e9ad43de2d96e/master/pass/the-ultimate-hamburger.jpg" alt="hamburguer" />
       <div className={classes.card__body}>
         <h5 className={classes.card__title}>Hamburguer</h5>
-        <button className={classes.card__button} onClick={() => setIsDispatching(!isDispatching)} disabled={isDispatching}>{isDispatching ? `Time left: ${countDown}` : 'Dispatch'}</button>
+        {
+          showButton &&
+          <button className={classes.card__button} onClick={() => setIsDispatching(!isDispatching)} disabled={isDispatching}>{isDispatching ? `Time left: ${countDown}` : 'Dispatch'}</button>
+        }
       </div>
     </div>
   )
