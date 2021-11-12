@@ -1,0 +1,48 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  width: 20rem;
+  margin-bottom: 1rem;
+}
+
+.card__body {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+  align-self: center;
+}
+
+.card__title {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.card__button {
+  width: 100%;
+  padding: 0.25rem;
+  outline: unset;
+  background: #363636;
+  color: white;
+  font-size: 1rem;
+  border: 1px solid #646161;
+  border-radius: 0.75rem;
+  transition: 0.25s ease;
+}
+
+.card__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.card__button:disabled {
+  cursor: no-drop;
+  background: #363636;
+  opacity: 0.8;
+}

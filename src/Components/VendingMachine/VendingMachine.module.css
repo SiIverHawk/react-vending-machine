@@ -1,0 +1,18 @@
+.content {
+  display: inline-block;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.content hr {
+  background-color: #c9c7c7;
+  border: none;
+  height: 1px;
+}
