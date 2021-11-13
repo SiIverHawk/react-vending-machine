@@ -7,8 +7,10 @@
 .wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 1.5rem;
+  justify-content: flex-start;
+  margin-block: 2rem;
+  row-gap: 2rem;
+  column-gap: 1.2rem;
 }
 
 .content hr {

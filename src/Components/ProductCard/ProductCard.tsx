@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import classes from "./Products.module.css";
+import classes from "./ProductCard.module.css";
 
-interface IProducts {
-  preparation_time?: number,
-  showButton?: boolean,
+type Props = {
+  product: Product;
+  showButton?: boolean
 }
 
-const Products: React.FC<IProducts> = ({ preparation_time = 0, showButton = true }) => {
+const ProductCard: React.FC<Props> = ({ product: { name, preparation_time, thumbnail }, showButton = true }) => {
 
   const [countDown, setCountDown] = useState<number>(preparation_time)
   const [isDispatching, setIsDispatching] = useState(false)
@@ -30,9 +30,11 @@ const Products: React.FC<IProducts> = ({ preparation_time = 0, showButton = true
 
   return (
     <div className={classes.card}>
-      <img src="https://assets.epicurious.com/photos/57c5c6d9cf9e9ad43de2d96e/master/pass/the-ultimate-hamburger.jpg" alt="hamburguer" />
+      <img src={thumbnail} alt="hamburguer" className={classes.card__image} />
       <div className={classes.card__body}>
-        <h5 className={classes.card__title}>Hamburguer</h5>
+        <h5 className={classes.card__title}>{name}</h5>
+      </div>
+      <div className={classes.card__footer}>
         {
           showButton &&
           <button className={classes.card__button} onClick={() => setIsDispatching(!isDispatching)} disabled={isDispatching}>{isDispatching ? `Time left: ${countDown}` : 'Dispatch'}</button>
@@ -42,4 +44,4 @@ const Products: React.FC<IProducts> = ({ preparation_time = 0, showButton = true
   )
 }
 
-export default Products
+export default ProductCard

@@ -1,29 +1,40 @@
-import React from "react";
-import Products from "../Products/Products";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import useFetch from "../../Hooks/useFetch";
+import { useTypedSelector } from "../../Hooks/useTypeSelector";
+import { loadProducts } from "../../State/actions/product";
+import ProductCard from "../ProductCard/ProductCard";
 import classes from "./VendingMachine.module.css";
 
 const VendingMachine: React.FC = () => {
+
+  const { response, loading } = useFetch({ url: 'https://vending-machine-test.vercel.app/api/products' });
+
+  const dispatch = useDispatch();
+  const { availableProducts } = useTypedSelector(state => state.products)
+
+  useEffect(() => {
+    if (response.length) dispatch(loadProducts(response))
+  }, [response, dispatch]);
+
   return (
     <main className={classes.content}>
-      <h1>Available products</h1>
-      <hr />
-      <div className={classes.wrapper}>
-        {
-          [1, 2, 3, 4, 5, 6].map(items => (
-            <Products key={items} preparation_time={5} />
-          ))
-        }
-      </div>
-      <h1>Dispatched Products</h1>
-      <hr />
-      <div className={classes.wrapper}>
-        {
-          [1, 2, 3, 4, 5, 7].map(items => (
-            <Products key={items} preparation_time={5} showButton={false} />
-          ))
-        }
-      </div>
-    </main>
+      {
+        loading ? (<h1>Loading...</h1>)
+          : (
+            <>
+              <h1>Available Products</h1>
+              <div className={classes.wrapper}>
+                {
+                  availableProducts.map((product: Product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))
+                }
+              </div>
+            </>
+          )
+      }
+    </main >
   )
 }
 
