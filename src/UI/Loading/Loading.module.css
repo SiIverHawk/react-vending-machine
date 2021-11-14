@@ -1,0 +1,20 @@
+.loading__container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.loading__spinner {
+  height: 10rem;
+  width: 10rem;
+  animation: spinner 0.7s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

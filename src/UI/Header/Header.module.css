@@ -1,4 +1,4 @@
-.main-header {
+.header {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,12 +7,35 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
   background: #363636;
   padding: 0 2rem;
   z-index: 1030;
 }
 
-.main-header h1 {
+.header h1 {
   color: white;
+}
+
+.header__anchor_wrapper {
+  margin-top: 0.5rem;
+}
+
+.header__anchor {
+  background-color: unset;
+  outline: unset;
+  border: 1px solid white;
+  color: white;
+  padding: 1rem 1.15rem;
+  border-radius: 1.5rem;
+  transition: 0.25s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 1rem;
+  text-align: start;
+}
+
+.header__anchor:hover {
+  background-color: white;
+  color: black;
 }

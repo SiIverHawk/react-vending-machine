@@ -7,5 +7,5 @@ interface Product {
 
 interface ProductState {
   availableProducts: Product[];
-  dispatchedProducts: object[]
+  dispatchedProducts: object[];
 }

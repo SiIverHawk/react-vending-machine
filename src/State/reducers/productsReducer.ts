@@ -2,18 +2,18 @@ import { ProductType, ActionProduct } from "../actionTypes/productTypes";
 
 const initialState = {
   availableProducts: [],
-  dispatchedProducts: []
+  dispatchedProducts: [],
 };
 
 export const productsReducer = (
   state: ProductState = initialState,
-  Product: ActionProduct
+  action: ActionProduct
 ): ProductState => {
-  switch (Product.type) {
+  switch (action.type) {
     case ProductType.LOAD_PRODUCTS:
       return {
         ...state,
-        availableProducts: Product.payload,
+        availableProducts: action.payload,
       };
     default:
       return state;

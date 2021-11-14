@@ -9,25 +9,22 @@ interface IResponseProps {
   response: Product[];
   error: string;
   loading: boolean;
+  setReloading: (reloading: boolean) => void;
 }
 
 const useFetch = ({ url }: IRequestProps): IResponseProps => {
   const [response, setResponse] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [reloading, setReloading] = useState<boolean>(false);
 
   const fetchData = useCallback(async () => {
     try {
       let res = await axios.get(url);
       setResponse(res.data.data);
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      }
-
-      if (axios.isAxiosError(error)) {
-        setError(error.message);
-      }
+    } catch (e: any) {
+      setError(e.message as string);
+      setResponse([]);
     } finally {
       setLoading(false);
     }
@@ -37,7 +34,16 @@ const useFetch = ({ url }: IRequestProps): IResponseProps => {
     fetchData();
   }, [fetchData]);
 
-  return { response, error, loading };
+  useEffect(() => {
+    if (reloading) {
+      fetchData();
+      setReloading(false);
+    } else {
+      setError("");
+    }
+  }, [reloading, fetchData]);
+
+  return { response, error, loading, setReloading };
 };
 
 export default useFetch;
