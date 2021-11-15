@@ -6,11 +6,12 @@ export enum ProductType {
 
 interface ProductDispatch {
   type: ProductType.DISPATCH_PRODUCT;
+  payload: IProduct;
 }
 
 interface ProductLoad {
   type: ProductType.LOAD_PRODUCTS;
-  payload: Product[];
+  payload: IProduct[];
 }
 
 export type ActionProduct = ProductDispatch | ProductLoad;

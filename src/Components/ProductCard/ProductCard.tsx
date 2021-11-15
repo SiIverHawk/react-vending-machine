@@ -1,18 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../../Hooks/useTypeSelector";
+import { setDispatchedProduct } from "../../State/actions/product";
 import Button from "../../UI/Button/Button";
 import classes from "./ProductCard.module.css";
 
 type Props = {
-  product: Product;
+  product: IProduct;
   showButton?: boolean
 }
 
-const ProductCard: React.FC<Props> = ({ product: { name, preparation_time, thumbnail }, showButton = true }) => {
+const ProductCard: React.FC<Props> = ({ product: { id, name, preparation_time, thumbnail }, showButton = true }) => {
 
+  const dispatch = useDispatch()
   const [countDown, setCountDown] = useState<number>(preparation_time)
   const [isDispatching, setIsDispatching] = useState(false)
+  const { availableProducts } = useTypedSelector(state => state.products)
+
+  const handleDispatchedProducts = useCallback(
+    () => {
+      const dispatchedProduct = availableProducts.find(product => product.id === id)!;
+      dispatch(setDispatchedProduct(dispatchedProduct));
+    },
+    [availableProducts, dispatch, id],
+  );
 
   useEffect(() => {
+
     if (isDispatching) {
       const timer = setTimeout(() => {
         if (countDown > 0) {
@@ -21,13 +35,14 @@ const ProductCard: React.FC<Props> = ({ product: { name, preparation_time, thumb
         else {
           setIsDispatching(false);
           setCountDown(preparation_time);
+          handleDispatchedProducts();
         }
       }, 1000);
       return () => {
         clearTimeout(timer)
       }
     }
-  }, [countDown, isDispatching, preparation_time])
+  }, [countDown, isDispatching, preparation_time, handleDispatchedProducts])
 
   return (
     <div className={classes.card}>
@@ -38,7 +53,6 @@ const ProductCard: React.FC<Props> = ({ product: { name, preparation_time, thumb
       <div className={classes.card__footer}>
         {
           showButton &&
-          // <button className={classes.card__button} onClick={() => setIsDispatching(!isDispatching)} disabled={isDispatching}>{isDispatching ? `Time left: ${countDown}` : 'Dispatch'}</button>
           <Button type="button" title={isDispatching ? `Time left: ${countDown}` : 'Dispatch'} onClick={() => { setIsDispatching(!isDispatching) }} disabled={isDispatching} />
         }
       </div>

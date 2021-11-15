@@ -1,11 +1,11 @@
-interface Product {
+interface IProduct {
   id: number;
   name: string;
   preparation_time: number;
   thumbnail: string;
 }
 
-interface ProductState {
-  availableProducts: Product[];
-  dispatchedProducts: object[];
+interface IProductState {
+  availableProducts: IProduct[];
+  dispatchedProducts: IProduct[];
 }

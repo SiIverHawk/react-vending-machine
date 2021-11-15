@@ -6,7 +6,7 @@ interface IRequestProps {
 }
 
 interface IResponseProps {
-  response: Product[];
+  response: IProduct[];
   error: string;
   loading: boolean;
   setReloading: (reloading: boolean) => void;

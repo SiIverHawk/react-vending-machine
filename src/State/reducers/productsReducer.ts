@@ -6,14 +6,19 @@ const initialState = {
 };
 
 export const productsReducer = (
-  state: ProductState = initialState,
+  state: IProductState = initialState,
   action: ActionProduct
-): ProductState => {
+): IProductState => {
   switch (action.type) {
     case ProductType.LOAD_PRODUCTS:
       return {
         ...state,
         availableProducts: action.payload,
+      };
+    case ProductType.DISPATCH_PRODUCT:
+      return {
+        ...state,
+        dispatchedProducts: [...state.dispatchedProducts, action.payload],
       };
     default:
       return state;

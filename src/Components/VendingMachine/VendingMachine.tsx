@@ -38,7 +38,7 @@ const VendingMachine: React.FC = () => {
                       <h1>Available Products</h1>
                       <div className={classes.wrapper}>
                         {
-                          availableProducts.map((product: Product) => (
+                          availableProducts.map((product: IProduct) => (
                             <ProductCard key={product.id} product={product} />
                           ))
                         }

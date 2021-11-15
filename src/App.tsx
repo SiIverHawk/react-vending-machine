@@ -7,8 +7,8 @@ import Header from "./UI/Header/Header"
 const App: React.FC = () => {
   return (
     <>
-      <Header />
       <Provider store={store}>
+        <Header />
         <VendingMachine />
       </Provider>
     </>
