@@ -21,8 +21,8 @@ const SideDrawer: React.FC<IUIDrawerShow> = ({ isOpen }) => {
           <h3 className={classes.sideDrawer__heading}>Dispatched products</h3>
         </div>
         {
-          dispatchedProducts.map((item: IProduct) => (
-            <SideDrawerItems key={item.id} item={item} />
+          dispatchedProducts.map((item: IProduct, idx) => (
+            <SideDrawerItems key={`${item.id}-${idx}`} item={item} />
           ))
         }
       </div >
